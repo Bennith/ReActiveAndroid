@@ -21,6 +21,16 @@
         <activity android:name=".ui.activities.FoldersEditActivity"/>
         <activity android:name=".ui.activities.FolderSelectActivity"/>
 
+        <!-- pull request - bendothall -->
+        <!-- Transactions API Activity -->
+        <activity android:name=".ui.activities.TransactionsAPIActivity"
+            android:parentActivityName=".ui.activities.MainActivity"/>
+
+        <!-- pull request - bendothall -->
+        <!-- Pagination API Activity -->
+        <activity android:name=".ui.activities.PaginationAPIActivity"
+            android:parentActivityName=".ui.activities.MainActivity"/>
+
     </application>
 
 </manifest>

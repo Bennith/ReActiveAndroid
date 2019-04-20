@@ -20,5 +20,19 @@
         android:title="@string/delete_all_notes"
         app:showAsAction="never" />
 
+    <!-- pull request - bendothall -->
+    <!-- Transactions API menu item string title -->
+    <item
+        android:id="@+id/transaction_api"
+        android:title="@string/transactions_api_title"
+        app:showAsAction="never" />
+
+    <!-- pull request - bendothall -->
+    <!-- Pagination API menu item string title -->
+    <item
+        android:id="@+id/pagination_api"
+        android:title="@string/pagination_api_title"
+        app:showAsAction="never" />
+
 
 </menu>

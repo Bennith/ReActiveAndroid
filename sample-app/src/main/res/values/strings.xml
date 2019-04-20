@@ -15,4 +15,15 @@
     <string name="folder_name">Folder name</string>
     <string name="create_new_folder">Create new folder</string>
     <string name="note_folders">Note folders</string>
+
+    <!-- pull request - bendothall -->
+    <!-- Transactions API Strings -->
+    <string name="transactions_api_title">Transactions API</string>
+
+    <!-- pull request - bendothall -->
+    <!-- Pagination API Strings -->
+    <string name="pagination_api_title">Pagination API</string>
+    <string name="error_msg_unknown">Unknown Error Occurred</string>
+    <string name="tap_to_reload">Tap to Reload</string>
+
 </resources>

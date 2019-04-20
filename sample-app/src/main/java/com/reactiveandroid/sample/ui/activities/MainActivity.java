@@ -1,5 +1,6 @@
 package com.reactiveandroid.sample.ui.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.RecyclerView;
@@ -7,6 +8,7 @@ import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
@@ -74,10 +76,23 @@ public class MainActivity extends MvpAppCompatActivity implements NotesListView 
         startActivity(NoteDetailsActivity.buildIntent(this, noteId));
     }
 
+    //pull request - bendothall
+    //Transactions API
+    public void openTransactionsAPIActivityScreen() {
+        startActivity(new Intent(MainActivity.this, TransactionsAPIActivity.class));
+    }
+
+    //pull request - bendothall
+    //Pagination API
+    public void openPaginationAPIActivityScreen() {
+        startActivity(new Intent(MainActivity.this, PaginationAPIActivity.class));
+    }
+
     @Override
     public void openFoldersEditScreen() {
         startActivity(FoldersEditActivity.buildIntent(this));
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -94,6 +109,18 @@ public class MainActivity extends MvpAppCompatActivity implements NotesListView 
                 break;
             case R.id.delete_all_notes:
                 presenter.onDeleteAllNotesClicked();
+                break;
+
+            //pull request - bendothall
+            //Transactions API menu item action
+            case R.id.transaction_api:
+                openTransactionsAPIActivityScreen();
+                break;
+
+            //pull request - bendothall
+            //Transactions API menu item action
+            case R.id.pagination_api:
+                openPaginationAPIActivityScreen();
                 break;
         }
         return super.onOptionsItemSelected(item);

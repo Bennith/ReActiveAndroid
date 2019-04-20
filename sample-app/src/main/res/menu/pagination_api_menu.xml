@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- pull request - bendothall -->
+<!-- Pagination API pagination_menu -->
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/filterById"
+        android:title="Filter By Id"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/filterByTitle"
+        android:title="Filter By Title"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/filterByText"
+        android:title="Filter By Text"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/filterByColor"
+        android:title="Filter By Color"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/filterByCreatedDate"
+        android:title="Filter By Created Date"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/filterByUpdatedDate"
+        android:title="Filter By Updated Date"
+        app:showAsAction="never" />
+
+
+</menu>
