@@ -2,8 +2,8 @@ package com.reactiveandroid;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.reactiveandroid.internal.database.DatabaseConfig;
 import com.reactiveandroid.internal.database.DatabaseInfo;

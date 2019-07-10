@@ -1,6 +1,6 @@
 package com.reactiveandroid.query;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 public abstract class QueryBase<TableClass> implements Query {
 

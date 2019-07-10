@@ -5,8 +5,6 @@ package com.reactiveandroid.sample.ui.activities;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -15,8 +13,14 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.amulyakhare.textdrawable.util.ColorGenerator;
+import com.reactiveandroid.Model;
 import com.reactiveandroid.ReActiveAndroid;
+import com.reactiveandroid.internal.database.table.TableInfo;
+import com.reactiveandroid.internal.serializer.TypeSerializer;
 import com.reactiveandroid.query.Delete;
 import com.reactiveandroid.query.Select;
 import com.reactiveandroid.query.api.Transactions;
@@ -29,16 +33,22 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 
+import static com.reactiveandroid.query.api.Transactions.BulkCRUDUpdates;
+import static com.reactiveandroid.query.api.Transactions.EndTransactions;
+
 public class TransactionsAPIActivity extends AppCompatActivity {
 
     CheckBox
             purge_data,
-            use_transactions;
+            use_transactions,
+            use_bulk_updates;
 
     EditText
             transactions_entries;
@@ -78,6 +88,7 @@ public class TransactionsAPIActivity extends AppCompatActivity {
 
         purge_data = (CheckBox)findViewById(R.id.purge_data);
         use_transactions = (CheckBox)findViewById(R.id.use_transactions);
+        use_bulk_updates = (CheckBox)findViewById(R.id.use_bulk_updates);
 
         transactions_entries = (EditText)findViewById(R.id.transactions_entries);
 
@@ -136,6 +147,7 @@ public class TransactionsAPIActivity extends AppCompatActivity {
 
         purge_data.setEnabled(false);
         use_transactions.setEnabled(false);
+        use_bulk_updates.setEnabled(false);
         transactions_entries.setEnabled(false);
         process.setEnabled(false);
         overallProgress.setVisibility(View.VISIBLE);
@@ -146,6 +158,7 @@ public class TransactionsAPIActivity extends AppCompatActivity {
 
         purge_data.setEnabled(true);
         use_transactions.setEnabled(true);
+        use_bulk_updates.setEnabled(true);
         transactions_entries.setEnabled(true);
         process.setEnabled(true);
         overallProgress.setVisibility(View.GONE);
@@ -165,7 +178,7 @@ public class TransactionsAPIActivity extends AppCompatActivity {
 
         try {
 
-            List<String> buildPassedData = new ArrayList<String>();
+            List<Note> buildPassedData = new ArrayList<Note>();
             int wordLength = 25;
             actualNotesCount = 0;
 
@@ -199,7 +212,11 @@ public class TransactionsAPIActivity extends AppCompatActivity {
                 }
 
                 String generatedString = buffer.toString();
-                buildPassedData.add(generatedString);
+
+                Note note = new Note();
+                note.setTitle(generatedString);
+                note.setText(generatedString);
+                buildPassedData.add(note);
 
                 if(addRowsAmount == rowIndex){
                     break;
@@ -212,57 +229,76 @@ public class TransactionsAPIActivity extends AppCompatActivity {
             startTime = new Date();
             startTimeHumanFriendly = dateFormat.format(startTime);
 
-            if(use_transactions.isChecked()){
-                Transactions.BeginTransactions(AppDatabase.class);
-            }
+            if(!use_bulk_updates.isChecked()) {
+
+                if (use_transactions.isChecked()) {
+                    Transactions.BeginTransactions(AppDatabase.class);
+                }
 
 
-            if(purge_data.isChecked()){
-                Delete.from(Note.class).execute();
-            }
+                if (purge_data.isChecked()) {
+                    Delete.from(Note.class).execute();
+                }
 
-            getPassedDataIndex = 0;
-            rowProcessedCount = 0;
-            for(String item : buildPassedData) {
+                getPassedDataIndex = 0;
+                rowProcessedCount = 0;
 
-                getPassedDataIndex++;
+                for(Note note : Select.from(Note.class).fetch()){
 
-                String title = "";
-                title = item;
+                    note.setTitle(note.getTitle() + " updated");
+                    note.save(note);
+                    rowProcessedCount++;
 
-                if(!title.isEmpty()){
+                }
 
-                    if(Select.from(Note.class).where("title = ?", title).count() == 1){
+                for (Note item : buildPassedData) {
 
-                        //update
-                        Note updateNote = Select.from(Note.class).where("title = ?", title).fetchSingle();
-                        updateNote.setTitle(title);
-                        updateNote.setText(title);
+                    getPassedDataIndex++;
 
-                        if(updateNote.save() > 0){
+                    String title = "";
+                    title = item.getTitle();
+
+                    if (!title.isEmpty()) {
+
+                        if (Select.from(Note.class).where("title = ?", title).count() == 1) {
+
+                            //update
+                            Note updateNote = Select.from(Note.class).where("title = ?", title).fetchSingle();
+                            updateNote.save(item);
                             rowProcessedCount++;
-                        }
 
-                    }else{
+                        } else {
 
 
-                        //create
-                        Note createNote = new Note(title, title, ColorGenerator.MATERIAL.getRandomColor());
-                        if(createNote.save() > 0){
-                            rowProcessedCount++;
+                            //create
+                            Note createNote = new Note(title, title, ColorGenerator.MATERIAL.getRandomColor());
+                            if (createNote.save() > 0) {
+                                rowProcessedCount++;
+                            }
+
                         }
 
                     }
 
                 }
 
+
+                if (use_transactions.isChecked()) {
+                    EndTransactions(AppDatabase.class);
+                }
+
+            }else{
+
+                //Use Transactions Bulk Update API
+                for(Note note : Select.from(Note.class).fetch()){
+                    buildPassedData.add(note);
+                }
+
+                BulkCRUDUpdates(AppDatabase.class, Note.class, buildPassedData);
+
             }
 
             actualNotesCount = Select.from(Note.class).count();
-
-            if(use_transactions.isChecked()){
-                Transactions.EndTransactions(AppDatabase.class);
-            }
 
             endTime = new Date();
             endTimeHumanFriendly = dateFormat.format(endTime);

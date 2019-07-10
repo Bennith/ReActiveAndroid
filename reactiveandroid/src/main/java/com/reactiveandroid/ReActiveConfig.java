@@ -1,7 +1,7 @@
 package com.reactiveandroid;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.reactiveandroid.internal.database.DatabaseConfig;
 

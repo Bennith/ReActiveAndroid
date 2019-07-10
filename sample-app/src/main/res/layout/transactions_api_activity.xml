@@ -20,7 +20,7 @@
         android:scaleY="5"
         android:visibility="gone" />
 
-    <android.support.v4.widget.NestedScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -64,13 +64,29 @@
             android:layout_height="wrap_content"
             android:textSize="10dp"
             android:layout_marginLeft="32dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="5dp"
             android:text="Use the Transaction API to process Data to the Notes Table\n* Uncheck to use standard, non-transactional SQL queries"/>
+
+            <CheckBox
+                android:id="@+id/use_bulk_updates"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:layout_marginLeft="32dp"
+                android:text="Use Transactions Bulk Update API"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="10dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginBottom="20dp"
+                android:text="Passes Model List Data to Transaction API for Mass Update"/>
 
         <EditText
             android:id="@+id/transactions_entries"
             android:layout_width="wrap_content"
-            android:text="15000"
+            android:text="150"
             android:minWidth="200dp"
             android:layout_height="wrap_content"
             android:inputType="number"/>
@@ -131,7 +147,7 @@
 
     </LinearLayout>
 
-    </android.support.v4.widget.NestedScrollView>
+    </androidx.core.widget.NestedScrollView>
 
 
 </LinearLayout>

@@ -1,6 +1,6 @@
 package com.reactiveandroid.sample.mvp.models;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.reactiveandroid.Model;
 import com.reactiveandroid.annotation.Column;

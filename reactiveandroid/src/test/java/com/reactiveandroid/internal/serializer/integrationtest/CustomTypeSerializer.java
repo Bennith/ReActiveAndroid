@@ -1,6 +1,6 @@
 package com.reactiveandroid.internal.serializer.integrationtest;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.reactiveandroid.internal.serializer.Blob;
 import com.reactiveandroid.internal.serializer.TypeSerializer;

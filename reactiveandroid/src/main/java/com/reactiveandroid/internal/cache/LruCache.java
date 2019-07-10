@@ -16,7 +16,8 @@ package com.reactiveandroid.internal.cache;
  * limitations under the License.
  */
 
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.util.LinkedHashMap;
 import java.util.Locale;

@@ -1,7 +1,7 @@
 package com.reactiveandroid.internal.database.table;
 
 import android.database.DatabaseUtils;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.text.TextUtils;
 
 import com.reactiveandroid.annotation.Column;

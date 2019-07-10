@@ -1,14 +1,14 @@
 package com.reactiveandroid.sample.ui.adapters.foldersedit;
 
 import android.app.AlertDialog;
-import android.support.design.widget.TextInputLayout;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.google.android.material.textfield.TextInputLayout;
 import com.reactiveandroid.sample.R;
 import com.reactiveandroid.sample.mvp.models.Folder;
 import com.reactiveandroid.sample.utils.AppUtils;

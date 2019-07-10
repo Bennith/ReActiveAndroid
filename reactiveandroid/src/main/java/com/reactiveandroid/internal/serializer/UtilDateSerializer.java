@@ -1,6 +1,6 @@
 package com.reactiveandroid.internal.serializer;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import java.util.Date;
 

@@ -14,7 +14,7 @@
         android:tint="@color/md_blue_grey_600"
         app:srcCompat="@drawable/ic_folder_grey_24dp" />
 
-    <android.support.design.widget.TextInputLayout
+    <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/folder_name_input_layout"
         android:layout_width="match_parent"
         android:layout_height="56dp"
@@ -45,7 +45,7 @@
             android:focusable="true"
             android:focusableInTouchMode="true" />
 
-    </android.support.design.widget.TextInputLayout>
+    </com.google.android.material.textfield.TextInputEditText>
 
     <ImageButton
         android:id="@+id/right_button"

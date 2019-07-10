@@ -1,7 +1,7 @@
 package com.reactiveandroid.internal.utils;
 
 import android.database.Cursor;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.reactiveandroid.ReActiveAndroid;
 import com.reactiveandroid.internal.ModelAdapter;

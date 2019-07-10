@@ -1,7 +1,7 @@
 package com.reactiveandroid.test;
 
 import android.os.Build;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.reactiveandroid.BuildConfig;
 
